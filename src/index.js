@@ -6,13 +6,14 @@ const stringify = require('csv-stringify');
 const {loadConfig, writeConfig} = require('./config');
 const {login, scrapeCards, scrapeMonth, scrapeData} = require('./wmataDotCom');
 
+const prompt = inquirer.createPromptModule({ output: process.stderr })
 
 const cardUsageHistory = async (args) => {
 	const browser = await puppeteer.launch({headless: !args.showBrowser});
 	let config = loadConfig();
 
 	if (!config.username || !config.password) {
-		let response = await inquirer.prompt([
+		let response = await prompt([
       {
         type: 'input',
         name: 'username',
@@ -38,7 +39,7 @@ const cardUsageHistory = async (args) => {
 		if (config.card) {
 			defaultIdx = cards.map(card => card.id).indexOf(config.card);
 		}
-		let response = await inquirer.prompt([
+		let response = await prompt([
       {
         type: 'list',
         name: 'card',
@@ -54,9 +55,14 @@ const cardUsageHistory = async (args) => {
 
 	let data = await scrapeData(page, args);
 
-	stringify(data, { header: true })
-		.pipe(fs.createWriteStream(`card_${args.card}.csv`))
+	let csvOutput = stringify(data, { header: true })
 
+	if (args.output) {
+		csvOutput.pipe(fs.createWriteStream(args.output))
+	} else {
+		csvOutput.pipe(process.stdout)
+	}
+	
 	await browser.close();
 }
 

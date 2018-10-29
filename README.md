@@ -8,11 +8,11 @@ If you use SmartBenefits to fund your SmarTrip card, your Card Usage Report Deta
 
 Clone this repository, then run:
 
-  `npm install -g`
+    npm install -g
 
 ## Usage
 
-  `smartrip`
+    smartrip
 
 Enter your WMATA username and password when prompted. These will be stored in `~/.wmata` so you won't have to re-enter them.
 
@@ -21,3 +21,11 @@ Then select a card from the list. This card will be stored as your default in `~
 The data will be scraped into `card_{CARD_ID}.csv`.
 
 If you wish to only scrape a specific year and/or month you can use `--year/-y {YEAR}` and `--month/-m {MONTH}`. Month is a 1-indexed integer, so to scrape October 2018 you would run `smartrip --year 2018 --month 10`.
+
+You can save the output to a file by directing stdout to a file:
+
+    smartrip > data.csv
+
+Or you can specify an output file on the command line with `--output/-o`:
+
+    smartrip --output data.csv
