@@ -1,0 +1,24 @@
+{
+  "name": "wmata-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "csv": "^4.0.0",
+    "inquirer": "^6.2.0",
+    "moment-timezone": "^0.5.21",
+    "puppeteer": "^1.8.0",
+    "puppeteer-core": "^1.8.0",
+    "yaml": "^1.0.0",
+    "yargs": "^12.0.2"
+  },
+  "bin": {
+    "smartrip": "bin/smartrip"
+  }
+}

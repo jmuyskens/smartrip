@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+let smarTripScraper = require('../src/')
+
+let args = require('yargs')
+  .option('card', {
+    alias: 'c',
+    describe: 'SmarTrip card ID',
+    type: 'string'
+  })
+  .option('show-browser', {
+    alias: 's',
+    describe: 'Show browser instead of running in headless mode',
+    type: 'boolean',
+    default: false
+  })
+  .option('output', {
+    alias: 'o',
+    describe: 'File to output data',
+    type: 'string'
+  })
+  .option('year', {
+    alias: 'y',
+    describe: 'Year',
+    type: 'integer'
+  })
+  .option('month', {
+    alias: 'm',
+    describe: 'Month',
+    type: 'integer'
+  })
+  .argv
+
+smarTripScraper(args)
